@@ -15,7 +15,7 @@ proto-go:
          google.golang.org/grpc/cmd/protoc-gen-go-grpc
   COPY api.proto /defs
   RUN mkdir /defs/go-api
-  RUN protoc --proto_path=/defs --go_out=/defs/go-api /defs/api.proto
+  RUN protoc --proto_path=/defs --go_out=/defs/go-api --go-grpc_out=/defs/go-api /defs/api.proto
   SAVE ARTIFACT ./go-api /go-pb AS LOCAL go-pb
 
 proto-py:

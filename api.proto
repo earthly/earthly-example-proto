@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+option go_package = "github.com/earthly/earthly-example-proto";
+
+package simplekeyvalue;
+
+// The greeting service definition.
+service KeyValue {
+  // Sends a greeting
+  rpc Set (SetRequest) returns (SetReply) {}
+  rpc Get (GetRequest) returns (GetReply) {}
+}
+
+// SetRequest contains a key and value to set
+message SetRequest {
+  string key = 1;
+  string value = 2;
+}
+
+// TODO unneeded?
+message SetReply {
+  string status = 1;
+}
+
+// GetRequest contains a key and value to set
+message GetRequest {
+  string key = 1;
+}
+
+// SetReply contains the value
+message GetReply {
+  string value = 1;
+}

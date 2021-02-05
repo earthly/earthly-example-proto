@@ -33,6 +33,7 @@ proto-py:
   SAVE ARTIFACT ./py-api /py-pb AS LOCAL py-pb
 
 proto-rb:
+  FROM --platform=linux/amd64 +base
   RUN apt-get install -y ruby
   RUN gem install grpc grpc-tools
   COPY api.proto /defs

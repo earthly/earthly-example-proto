@@ -4,7 +4,13 @@ WORKDIR /defs
 RUN apt-get update && apt-get install -y wget unzip
 
 # setup protoc
-RUN wget -O protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protoc-3.13.0-linux-x86_64.zip
+ARG TARGETARCH
+RUN \
+  if [ "$TARGETARCH" == "amd64" ]; then \
+    wget -O protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protoc-3.13.0-linux-x86_64.zip ;\
+  else \
+    wget -O protoc.zip https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protoc-3.13.0-linux-aarch_64.zip ;\
+  fi
 RUN unzip protoc.zip -d /usr/local/
 
 proto-go:

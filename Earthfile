@@ -24,10 +24,6 @@ proto-go:
   RUN protoc --proto_path=/defs --go_out=/defs/go-api --go-grpc_out=/defs/go-api /defs/api.proto
   SAVE ARTIFACT ./go-api/kvapi /go-pb AS LOCAL go-pb
 
-test-proto-go:
-  COPY +proto-go/go-pb kvapi
-  RUN ls kvapi/api.pb.go
-
 proto-py:
   RUN apt-get install -y python3 python3-pip
   RUN pip3 install grpcio grpcio-tools
@@ -46,7 +42,6 @@ proto-rb:
   SAVE ARTIFACT ./rb-api /rb-pb AS LOCAL rb-pb
 
 proto-all:
-  BUILD +test-proto-go
   BUILD +proto-go
   BUILD +proto-py
   BUILD +proto-rb

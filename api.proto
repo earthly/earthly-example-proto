@@ -1,6 +1,8 @@
 syntax = "proto3";
 
-option go_package = "kvapi";
+// go_package is encoded as "import_path;package_name"; for further details
+// see https://github.com/golang/protobuf/issues/1043#issuecomment-590449295
+option go_package = "kvapi;kvapi";
 
 package simplekeyvalue;
 

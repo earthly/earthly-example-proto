@@ -1,5 +1,5 @@
 VERSION 0.6
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 WORKDIR /defs
 
 ENV DEBIAN_FRONTEND=noninteractive
@@ -17,10 +17,10 @@ RUN unzip protoc.zip -d /usr/local/
 
 proto-go:
   RUN apt-get install -y golang git
-  ENV GO111MODULE=on
   ENV PATH=$PATH:/root/go/bin
-  RUN go get google.golang.org/protobuf/cmd/protoc-gen-go \
-         google.golang.org/grpc/cmd/protoc-gen-go-grpc
+  RUN go mod init proto-go
+  RUN go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+  RUN go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
   COPY api.proto /defs
   RUN mkdir /defs/go-api
   RUN protoc --proto_path=/defs --go_out=/defs/go-api --go-grpc_out=/defs/go-api /defs/api.proto
